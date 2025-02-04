@@ -1,4 +1,4 @@
-name: Update Walrus Site
+name: Deploy Static HTML to Walrus
 
 on:
   push:
@@ -13,22 +13,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build React app
-        run: npm run build
-
       - name: Deploy site to Walrus
-        uses: zktx-io/walrus-sites-ga@v0.3.4 # Use the correct version if needed
+        uses: zktx-io/walrus-sites-ga@v0.3.4
         with:
-          site-path: './build' # Adjust if your build output is in a different directory
-          network: 'testnet' # Or 'mainnet' as needed
+          site-path: '.' #  For static HTML, the site path is likely the root
+          network: 'testnet' # Or 'mainnet'
           epochs: 183 # Adjust as needed
           object-id: '0x1a64a12447b5581ba4dd40cb0cd8f9bb485a7db3b42789158e467e5e5c531af8' # Your object ID
           wal-exchange-enabled: false # Adjust as needed
